@@ -20,61 +20,20 @@ Print the answer as an integer.
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(){
-    int n;
-    scanf("%d", &n);
-    
+int a;
+int b;
+int c;
+int soma;
 
-    int *l = (int *)malloc(n * sizeof(int));
-    int *r = (int *)malloc(n * sizeof(int));
-    int *fechamentoEsquerda = (int *)malloc(n * sizeof(int));
-    int *fechamentoDireita = (int *)malloc(n * sizeof(int));
-    
-    int t;
+scanf("%d %d %d", &a, &b, &c);
 
-    for (int i = 0; i < n; i++){
-        scanf("%d %d %d", &t, &l[i], &r[i]);
-        if (t == 1) {
-            fechamentoEsquerda[i] = 1;
-            fechamentoDireita[i] = 1;
-        }
-        else if (t == 2) {
-            fechamentoEsquerda[i] = 1;
-            fechamentoDireita[i] = 0;
-        }
-        else if (t == 3) {
-            fechamentoEsquerda[i] = 0;
-            fechamentoDireita[i] = 1;
-        }
-        else if (t == 4) {
-            fechamentoEsquerda[i] = 0;
-            fechamentoDireita[i] = 0;
-        }
-    }
-    
-    int count = 0;
+if(a <= b && a <= c) soma = b + c;
+if(b <= a && b <= c) soma = a + c;
+if(c <= a && c <= b) soma = a + b;
 
-    for (int i = 0; i < n; i++){
-        for (int j = i + 1; j < n; j++){
+printf("%d\n", soma);
 
-            if (r[i] < l[j] || (r[i] == l[j] && (!fechamentoDireita[i] || !fechamentoEsquerda[j])))
-                continue;
-
-            if (r[j] < l[i] || (r[j] == l[i] && (!fechamentoDireita[j] || !fechamentoEsquerda[i])))
-                continue;
-
-            count++;
-        }
-    }
-    
-    printf("%d\n", count);
-    
-    free(l);
-    free(r);
-    free(fechamentoEsquerda);
-    free(fechamentoDireita);
-    
     return 0;
 }
